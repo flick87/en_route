@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Kit(models.Model):
     kit_id        =  models.AutoField(primary_key=True, unique=True)
@@ -8,26 +9,26 @@ class Kit(models.Model):
     def __str__(self):
         return self.name
 
-def Hardware(models.Model):
+class Hardware(models.Model):
     hw_id         = models.AutoField(primary_key=True, unique=True)
     hw_name       = models.CharField(max_length=55)
     serial_number = models.CharField(max_length=128, null=True)
     part_number   = models.CharField(max_length=128, null=True)
-    kid_id        = models.ForeignKey('Kit', on_delete=models.RESTRICT, null=True)
+    kit_id        = models.ForeignKey('Kit', on_delete=models.RESTRICT, null=True)
 
     def __str__(self):
-    return self.name
+        return self.name
 
-def Software(models.Model):
+class Software(models.Model):
     sw_id         = models.AutoField(primary_key=True, unique=True)
-    hw_id         = models.ForeignKey('Hardware', n_delete=models.RESTRICT, null=True)
+    hw_id         = models.ForeignKey('Hardware', on_delete=models.RESTRICT, null=True)
     name          = models.CharField(max_length=55)
     version       = models.CharField(max_length=55)
 
     def __str__(self):
         return self.name
 
-def Customer(models.Model):
+class Customer(models.Model):
     customer_id     = models.AutoField(primary_key=True, unique=True)
     name            = models.CharField(max_length=55)
     phone           = models.IntegerField()
@@ -39,7 +40,7 @@ def Customer(models.Model):
 
 
 
-def Ticket(models.Model):
+class Ticket(models.Model):
     ticket_id       = models.AutoField(primary_key=True, unique=True)
     customer_id     = models.ForeignKey('Customer', on_delete=models.RESTRICT)
     date_created    = models.DateTimeField(default=timezone.now)
