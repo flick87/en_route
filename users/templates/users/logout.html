@@ -1,0 +1,10 @@
+{% extends "tracker/index.html" %}
+{% block content %}
+<div class="logout">
+    <h2>You have been logged out</h2>
+    <small class="text muted">
+        <a href="{% url 'login' %}">Log in again</a>
+    </small>
+</div>
+{% endblock content %}
+

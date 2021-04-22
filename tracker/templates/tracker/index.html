@@ -7,17 +7,31 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>En Route</title>
 </head>
-<body class='logo'>
-    <header>
-        <div class="main">
-            <ul>
-                <li><a href="{% url 'tracker-home' %}">Home</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Register</a></li>
-                <li><a href="{% url 'tracker-new_customer' %}">New Customer</a></li>
-            </ul>
-        </div>
+
+<body class='main'>
+    <header class="page-header">
+        <h1>Company logo/image here</h1>
     </header>
+
+    <div class="topnav">
+        <div class="topnav-right">
+            <a href="{% url 'tracker-home' %}">Home</a>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <a href="{% url 'admin:index' %}">Admin</a>
+            {% endif %}
+            <a href="{% url 'tracker-new_customer' %}">New Customer</a>
+            <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">login</a>
+            {% endif %}
+
+        </div>
+    </div>
+{% if user.is_authenticated %}
+    <h1>Hello {{user}}</h1>
+{% endif %}
+
 
     {% block content %}{% endblock %}
 

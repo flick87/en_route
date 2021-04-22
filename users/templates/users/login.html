@@ -1,0 +1,18 @@
+{% extends "tracker/index.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Log In</h1>
+<div>
+    <form method="POST">{% csrf_token %}
+        <fieldset>
+            {{form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <div>
+        Need an account? <a href="{% url 'register' %}">Create Account</a>
+    </div>
+</div>
+{% endblock content %}

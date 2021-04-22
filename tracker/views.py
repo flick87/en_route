@@ -5,7 +5,7 @@ def home(request):
     return render(request, 'tracker/index.html')
 
 def create_order(request):
-    return render(request, 'tracker/index.html')
+    return render(request, 'tracker/create_order.html')
 
 # create_order/view_order might be the same page in the end
 def view_order(request):
