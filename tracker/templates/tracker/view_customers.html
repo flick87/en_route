@@ -1,0 +1,16 @@
+{% extends "tracker/index.html" %}
+{% block content %}
+
+    {% for customer in customers %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="">customer.name</a>
+            </div>
+            <h2><a class="article-title" href="">{{ customer.phone }}</a></h2>
+          </div>
+        </article>
+    {% endfor %}
+
+{% endblock content %}

@@ -6,8 +6,8 @@
 
 
 body.main {
-background-color: #000;
-color: #fff;
+  background-color: #fff;
+  color: #000;
 }
 
 /* Style the top navigation bar */
@@ -20,6 +20,10 @@ color: #fff;
 /* Right-aligned section inside the top navigation */
 .topnav-right {
   float: right;
+}
+
+.topnav-left {
+  float: left;
 }
 
 /* Style the topnav links */
@@ -44,3 +48,32 @@ header.page-header {
     padding: 20px;
     text-align: center;
 }
+
+.heading {
+  color: white;
+}
+
+/***************************************** Equipment *****************************/
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 25%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+
+
+/***********************************************************************************/

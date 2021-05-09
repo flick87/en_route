@@ -1,0 +1,21 @@
+{% extends "tracker/index.html" %}
+{% block content %}
+
+
+
+    {% for ticket in tickets %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src=""> <!-- Company logo here -->
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="">TICKET</a>
+              <small class="text-muted">{{ ticket.customer_id }}</small>
+            </div>
+            <h2><a class="article-title" href="">{{ ticket.lot }}</a></h2>
+            <p class="article-content">{{ ticket.street }}</p>
+          </div>
+        </article>
+    {% endfor %}
+
+
+{% endblock content %}

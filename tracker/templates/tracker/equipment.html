@@ -1,0 +1,36 @@
+{% extends "tracker/index.html" %}
+{% block content %}
+
+<div>
+  <form method="POST" action="">{% csrf_token %}
+    <table>
+      <tr>
+        <th>Your Equipment</th>
+      </tr>
+      {% for item in equipment %}
+        <tr>
+          <td>{{ item.name }} <input type="checkbox" id={{item.id}} name="equipment_name" value="{{item}}"> </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <input type='submit' value='check in' name="checkInForm"/>
+  </form>
+</div>
+
+<div>
+  <form method="POST" action="">{% csrf_token %}
+    <table>
+      <tr>
+        <th>Available Equipment</th>
+      </tr>
+      {% for item in available_hardware %}
+        <tr>
+          <td>{{ item.name }} <input type="checkbox" id={{item.id}} name="equipment_name" value="{{item}}"> </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <input type='submit' value='check out' name="checkOutForm"/>
+  </form>
+</div>
+
+{% endblock content %}

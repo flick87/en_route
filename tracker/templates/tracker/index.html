@@ -10,10 +10,13 @@
 
 <body class='main'>
     <header class="page-header">
-        <h1>Company logo/image here</h1>
+        <h1 class="heading">En Route</h1>
     </header>
 
     <div class="topnav">
+        <div class="topnav-left">
+            <a>Currently logged in as: {{user}}</a>
+        </div>
         <div class="topnav-right">
             <a href="{% url 'tracker-home' %}">Home</a>
             {% if user.is_authenticated %}
@@ -21,11 +24,14 @@
             <a href="{% url 'admin:index' %}">Admin</a>
             {% endif %}
             <a href="{% url 'tracker-new_customer' %}">New Customer</a>
+            <a href="{% url 'tracker-view_customers' %}">View Customers</a>
+            <a href="{% url 'tracker-new_ticket' %}">New Ticket</a>
+            <a href="{% url 'tracker-view_tickets' %}">View Tickets</a>
+            <a href="{% url 'tracker-equipment' %}">Equipment</a>
             <a href="{% url 'logout' %}">logout</a>
             {% else %}
             <a href="{% url 'login' %}">login</a>
             {% endif %}
-
         </div>
     </div>
 {% if user.is_authenticated %}
