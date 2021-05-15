@@ -1,16 +1,48 @@
 {% extends "tracker/index.html" %}
 {% block content %}
 
-    {% for customer in customers %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="">customer.name</a>
-            </div>
-            <h2><a class="article-title" href="">{{ customer.phone }}</a></h2>
-          </div>
-        </article>
-    {% endfor %}
+  <div class='customer'>
+    <div class='left-customer-table' style="overflow-x:auto;">
+      <form method="POST" action="">{% csrf_token %}
+        <table>
+          <tr>
+            <th>Customers</th>
+          </tr>
+          {% for customer in customers %}
+            <tr>
+              <td><button name='customer_select_button' value={{ customer.id }}>{{ customer }}</button></td>
+            </tr>
+          {% endfor %}
+        </table>
+      </form>
+    </div>
+
+    {% if request.method == 'POST' %}
+    <div class='middle-customer-table'>
+      <form method='POST' action="">{% csrf_token %}
+        <table>
+          {{customer_form.as_p}}
+          <input type=submit name='customer_save_button' value=save >
+        </table>
+    </div>
+
+    <div style="overflow-x:auto;">
+          <form method="POST" action="">{% csrf_token %}
+            <table>
+              <tr>
+                <th>Contacts</th>
+              </tr>
+              {% for contact in contacts %}
+                <tr>
+                  <td><button name='contact_button' value={{ contact.id }}>{{ contact.first }}{{ contact.last }}</button></td>
+                  <td>
+                </tr>
+              {% endfor %}
+            </table>
+          </form>
+    </div>
+    {% endif %}
+  </div>
+
 
 {% endblock content %}

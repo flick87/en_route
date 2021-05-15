@@ -59,7 +59,7 @@ header.page-header {
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 25%;
+  min-width: 300px;
 }
 
 td, th {
@@ -72,8 +72,75 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+div.equipment {
+    margin-left:  25%;
+    margin-right: 25%;
+    margin-top:   100px;
+
+}
+
+.left-div-table {
+  float: left;
+}
+
+.right-div-table {
+  float: right;
+}
 
 
 
+/***********************************************************************************/
+
+
+/***************************************** Tickets *****************************/
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  min-width: 300px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+div.customer {
+    margin-left:  5%;
+    margin-right: 25%;
+    margin-top:   100px;
+
+}
+
+.left-customer-table {
+  float: left;
+}
+
+.right-customer-table {
+  float: right;
+}
+
+
+/***********************************************************************************/
+/***************************************** Tickets *****************************/
+
+
+.left-customer-table {
+  float: left;
+}
+
+.middle-customer-table {
+  float: left;
+}
+
+.right-customer-table {
+  float: right;
+}
 
 /***********************************************************************************/

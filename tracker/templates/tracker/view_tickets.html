@@ -1,21 +1,72 @@
 {% extends "tracker/index.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
+<form name='search_form' method='POST' action="{% url 'tracker-view_tickets' %}">{% csrf_token %}
+    <a>{{ search_form.as_p }}</a>
+    <input type='submit'>
+</form>
 
+<div>
+    <div class='right-div-table'>
+      <form method="POST" action="">{% csrf_token %}
+        <table>
+          <tr>
+            <th>Tickets</th>
+          </tr>
+          <tr>
+            <th>Ticket #</th>
+            <th>Customer ID</th>
+            <th>Address</th>
+            <th>Due Date</th>
+            <th>Date Assigned</th>
+            <th>Assigned To</th>
+            <th>Selection</th>
+          </tr>
+          {% for ticket in user_tickets %}
+            <tr>
+              <td>{{ ticket.ticket_id }} </td>
+              <td>{{ ticket.customer_id }}</td>
+              <td>{{ ticket.address }}</td>
+              <td>{{ ticket.due_date }}</td>
+              <td>{{ ticket.date_assigned }}</td>
+              <td>{{ ticket.assigned_to }}</td>
+              <td><input type="checkbox" name="ticket_ids" value="{{ticket.ticket_id}}"></td>
+            </tr>
+          {% endfor %}
+        </table>
+        <input type='submit' value='submit' name="unassign_ticket"/>
+      </form>
+    </div>
 
-    {% for ticket in tickets %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src=""> <!-- Company logo here -->
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="">TICKET</a>
-              <small class="text-muted">{{ ticket.customer_id }}</small>
-            </div>
-            <h2><a class="article-title" href="">{{ ticket.lot }}</a></h2>
-            <p class="article-content">{{ ticket.street }}</p>
-          </div>
-        </article>
-    {% endfor %}
-
+    <div class='left-div-table'>
+      <form method="POST" action="">{% csrf_token %}
+        <table>
+          <tr>
+            <th>Available Tickets</th>
+          </tr>
+          <tr>
+            <th>Ticket #</th>
+            <th>Customer ID</th>
+            <th>Address</th>
+            <th>Due Date</th>
+            <th>Assigned To</th>
+            <th>Selection</th>
+          </tr>
+          {% for ticket in available_tickets %}
+            <tr>
+              <td>{{ ticket.ticket_id }}</td>
+              <td>{{ ticket.customer_id }}</td>
+              <td>{{ ticket.address }}</td>
+              <td>{{ ticket.due_date }}</td>
+              <td>{{ ticket.assigned_to }}
+              <td><input type="checkbox" name="ticket_ids" value={{ticket.ticket_id}}></td>
+            </tr>
+          {% endfor %}
+        </table>
+        <input type='submit' value='submit' name="assign_ticket"/>
+      </form>
+    </div>
+</div>
 
 {% endblock content %}

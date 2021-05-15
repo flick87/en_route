@@ -119,7 +119,7 @@ class Warranty(models.Model):
 
 
 class Customer(models.Model):
-    id     = models.AutoField(primary_key=True, unique=True)
+    id              = models.AutoField(primary_key=True, unique=True)
     address         = models.ForeignKey(Address, on_delete=models.RESTRICT, null=True)
     name            = models.CharField(max_length=55)
     phone           = models.CharField(validators=[phone_regex], max_length=17, blank=True)
@@ -149,17 +149,23 @@ class Contact(models.Model):
 class Ticket(models.Model):
     ticket_id       = models.AutoField(primary_key=True, unique=True)
     customer_id     = models.ForeignKey(Customer, on_delete=models.RESTRICT)
-    assigned_to     = models.ForeignKey(User, on_delete=models.RESTRICT, null=True)
-    address         = models.ForeignKey(Address, on_delete=models.RESTRICT, null=True, blank=True)
+    assigned_to     = models.ForeignKey(User, on_delete=models.RESTRICT, blank=True, null=True)
+    address         = models.ForeignKey(Address, on_delete=models.RESTRICT)
     date_created    = models.DateField(default=datetime.date.today())
-    due_date        = models.DateField(default=datetime.date.today() + relativedelta(months=12))
+    due_date        = models.DateField(null=False, blank=False)
     date_completed  = models.DateField(null=True, blank=True)
+    date_assigned   = models.DateField(blank=True, null=True)
     month_interval  = models.IntegerField(default=0)
     is_completed    = models.BooleanField(blank=False, default=False)
     # NOTES ******************************************* ?????????????????????????????????
 
     def __str__(self):
-        return self.customer_id.name
+        employee = ''
+        if self.assigned_to is None:
+            employee = 'NA'
+        else:
+            employee = str(self.assigned_to)
+        return self.customer_id.name + " Ticket #" + str(self.ticket_id) + " is assigned to " + employee
 
 class Note(models.Model):
     address_id      = models.ForeignKey(Address, on_delete=models.RESTRICT, null=True, blank=True)
