@@ -21,8 +21,6 @@ def create_ticket(request):
 def view_order(request):
     return render(request, 'tracker/index.html')
 
-
-
 @login_required(redirect_field_name=None, login_url='login')
 def view_tickets(request):
     search_form       = TicketSearchForm(initial={'search_date':'None', 'employee_select': 'None', 'customer_select': 'None'})
@@ -48,14 +46,6 @@ def view_tickets(request):
     return render(request, 'tracker/view_tickets.html', context)
 
 
-
-
-
-
-
-
-
-
 @login_required(redirect_field_name=None, login_url='login')
 def view_customers(request):
     customers = Customer.objects.all()
@@ -74,23 +64,6 @@ def view_customers(request):
         contacts = Contact.objects.all().filter(customer_id=request.session['selected_customer'])
     context   = {'customers': customers, 'customer': customer, 'customer_form': customer_form, 'contacts': contacts}
     return render(request, 'tracker/view_customers.html', context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # create_customer/view_customer might be the same page in the end
 @login_required(redirect_field_name=None, login_url='login')
@@ -120,7 +93,6 @@ def equipment(request):
         if 'checkInForm' in request.POST:
             release_ownership_of_items(equipment, user)
 
-    # NEED TO FIGURE OUT HOW YOU WANT TO LIST HARDWARE UNDER KITS
     kits = Kit.objects.all().filter(is_owned=True, owner=user)
     all_hardware = Hardware.objects.all()
     kit_hardware = all_hardware.filter(part_of_kit=True, is_owned=True, owner=user) #ALL KIT HW, not just a single kit
@@ -134,11 +106,6 @@ def equipment(request):
     post_data = {}
     context = {'equipment': user_equipment, 'available_hardware': available_equipment}
     return render(request, 'tracker/equipment.html', context)
-
-
-
-
-
 
 
 # ***************************************** Helper Functions Below *****************************************************************
@@ -203,7 +170,6 @@ def get_cleaned_filter_search(search_form):
     return to_return
 
 
-# NEED TO MAKE HARDWARE IN KITS NOT SELECTABLE SO THAT THE QUERIES FOR HARDWARES & KITS CAN BE FILTERED PROPERLY BY OWNED AND OWNER
 # Refactor
 def release_ownership_of_items(equipment_list, user):
     hardwares = Hardware.objects.all()
@@ -266,9 +232,6 @@ def unassign_ticket(ticket):
     ticket.assigned_to = None
     ticket.date_assigned = None
     ticket.save()
-
-
-
 
 
 # ************************************ Logs ******************************************
